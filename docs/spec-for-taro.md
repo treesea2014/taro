@@ -1,48 +1,3 @@
----
-title: Taro 规范
----
-
-## 项目组织
-
-### 文件组织形式
-
-> 以下文件组织规范为最佳实践的建议
-
-所有项目源代码请放在项目根目录 `src` 目录下，项目所需最基本的文件包括 **入口文件** 以及 **页面文件**
-
-* 入口文件为 `app.js`
-* 页面文件建议放置在 `src/pages` 目录下
-
-一个可靠的 Taro 项目可以按照如下方式进行组织
-
-    ├── config                 配置目录
-    |   ├── dev.js             开发时配置
-    |   ├── index.js           默认配置
-    |   └── prod.js            打包时配置
-    ├── src                    源码目录
-    |   ├── components         公共组件目录
-    |   ├── pages              页面文件目录
-    |   |   ├── index          index 页面目录
-    |   |   |   ├── banner     页面 index 私有组件
-    |   |   |   ├── index.js   index 页面逻辑
-    |   |   |   └── index.css  index 页面样式
-    |   ├── utils              公共方法库
-    |   ├── app.css            项目总通用样式
-    |   └── app.js             项目入口文件
-    └── package.json
-
-### 文件命名
-
-Taro 中普通 JS/TS 文件以小写字母命名，多个单词以下划线连接，例如 `util.js`、`util_helper.js`
-
-Taro 组件文件命名遵循 Pascal 命名法，例如 `ReservationCard.jsx`
-
-### 文件后缀
-
-Taro 中普通 JS/TS 文件以 `.js` 或者 `.ts` 作为文件后缀
-
-Taro 组件则以 `.jsx` 或者 `.tsx`  作为文件后缀，当然这不是强制约束，只是作为一个实践的建议，组件文件依然可以以 `.js` 或者 `.ts` 作为文件后缀
-
 ## JavaScript 书写规范
 
 在 Taro 中书写 JavaScript 请遵循以下规则
@@ -91,9 +46,9 @@ const z = `hello 'world'`
 if (user) {
                             // ✗ 错误
   const name = getName()
- 
+
 }
- 
+
 if (user) {
   const name = getName()    // ✓ 正确
 }
@@ -163,7 +118,7 @@ typeof !admin        // ✓ 正确
 ```javascript
 //comment           // ✗ 错误
 // comment          // ✓ 正确
- 
+
 /*comment*/         // ✗ 错误
 /* comment */       // ✓ 正确
 ```
@@ -285,10 +240,10 @@ var noVar = 'hello, world'   // ✗ 错误，请使用 const/let 定义变量
 // ✓ 正确
 const silent = true
 let verbose = true
- 
+
 // ✗ 错误
 const silent = true, verbose = true
- 
+
 // ✗ 错误
 let silent = true,
     verbose = true
@@ -300,7 +255,7 @@ let silent = true,
 ```javascript
 let name = 'John'
 let name = 'Jane'     // ✗ 错误
- 
+
 let name = 'John'
 name = 'Jane'         // ✓ 正确
 ```
@@ -310,7 +265,7 @@ name = 'Jane'         // ✓ 正确
 
 ```javascript
 let name = undefined    // ✗ 错误
- 
+
 let name
 name = 'value'          // ✓ 正确
 ```
@@ -394,7 +349,7 @@ const person = {
     this._name = value
   }
 }
- 
+
 const person = {
   set name (value) {
     this._name = value
@@ -454,9 +409,9 @@ const user = {
   name: 'Jane Doe', age: 30,
   username: 'jdoe86'            // ✗ 错误
 }
- 
+
 const user = { name: 'Jane Doe', age: 30, username: 'jdoe86' }    // ✓ 正确
- 
+
 const user = {
   name: 'Jane Doe',
   age: 30,
@@ -478,13 +433,13 @@ const user = { name: 'John Doe' }       // ✓ 正确
 ```javascript
 function foo (n) {
   if (n <= 0) return
- 
+
   arguments.callee(n - 1)   // ✗ 错误
 }
- 
+
 function foo (n) {
   if (n <= 0) return
- 
+
   foo(n - 1)
 }
 ```
@@ -495,7 +450,7 @@ function foo (n) {
 function sum (a, b, a) {  // ✗ 错误
   // ...
 }
- 
+
 function sum (a, b, c) {  // ✓ 正确
   // ...
 }
@@ -507,7 +462,7 @@ function sum (a, b, c) {  // ✓ 正确
 const name = function () {
   getName()
 }.bind(user)    // ✗ 错误
- 
+
 const name = function () {
   this.getName()
 }.bind(user)    // ✓ 正确
@@ -565,7 +520,7 @@ let config = new Object()   // ✗ 错误
 
 ```javascript
 const getName = function () { }()     // ✗ 错误
- 
+
 const getName = (function () { }())   // ✓ 正确
 const getName = (function () { })()   // ✓ 正确
 ```
@@ -596,7 +551,7 @@ const pattern = /\x20/    // ✓ 正确
 
 ```javascript
 const regexp = /test   value/   // ✗ 错误
- 
+
 const regexp = /test {3}value/  // ✓ 正确
 const regexp = /test value/     // ✓ 正确
 ```
@@ -608,7 +563,7 @@ const regexp = /test value/     // ✓ 正确
 ```javascript
 class animal {}
 const dog = new animal()    // ✗ 错误
- 
+
 class Animal {}
 const dog = new Animal()    // ✓ 正确
 ```
@@ -629,7 +584,7 @@ class Dog {
     super()   // ✗ 错误
   }
 }
- 
+
 class Dog extends Mammal {
   constructor () {
     super()   // ✓ 正确
@@ -694,7 +649,7 @@ const character = new Character()   // ✓ 正确
 ```javascript
 import { myFunc1 } from 'module'
 import { myFunc2 } from 'module'          // ✗ 错误
- 
+
 import { myFunc1, myFunc2 } from 'module' // ✓ 正确
 ```
 
@@ -818,12 +773,12 @@ if (options.quiet !== true)
 ```javascript
 // ✓ 正确
 const location = env.development ? 'localhost' : 'www.api.com'
- 
+
 // ✓ 正确
 const location = env.development
   ? 'localhost'
   : 'www.api.com'
- 
+
 // ✗ 错误
 const location = env.development ?
   'localhost' :
@@ -843,11 +798,11 @@ if (age === 42) { }    // ✓ 正确
 if (false) {    // ✗ 错误
   // ...
 }
- 
+
 if (x === 0) {  // ✓ 正确
   // ...
 }
- 
+
 while (true) {  // ✓ 正确
   // ...
 }
@@ -886,7 +841,7 @@ switch (filter) {
   case 2:
     doSomethingElse()
 }
- 
+
 switch (filter) {
   case 1:
     doSomething()
@@ -894,7 +849,7 @@ switch (filter) {
   case 2:
     doSomethingElse()
 }
- 
+
 switch (filter) {
   case 1:
     doSomething()
@@ -911,7 +866,7 @@ const result = true
 if (!!result) {   // ✗ 错误
   // ...
 }
- 
+
 const result = true
 if (result) {     // ✓ 正确
   // ...
@@ -952,7 +907,7 @@ try {
 } catch (e) {
   e = 'new value'             // ✗ 错误
 }
- 
+
 try {
   // ...
 } catch (e) {
@@ -984,700 +939,3 @@ try {
 ```javascript
 asyncTask('google.com').catch(err => console.log(err))   // ✓ 正确
 ```
-
-
-## 组件及 JSX 书写规范
-
-### 基本书写
-
-#### 组件创建
-
-Taro 中组件以类的形式进行创建，并且单个文件中只能存在单个组件
-
-#### 代码缩进
-
-> 使用两个空格进行缩进，不要混合使用空格与制表符作为缩进
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Text } from '@tarojs/components'
-
-class MyComponent extends Component {
-  render () {
-    return (
-	  <View className='test'>     // ✓ 正确
-        <Text>12</Text>     // ✗ 错误
-      </View>
-    )
-  }
-}
-```
-
-#### 单引号
-
-> JSX 属性均使用单引号
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  render () {
-    return (
-	  <View className='test'>     // ✓ 正确
-        <Text className="test_text">12</Text>     // ✗ 错误
-      </View>
-    )
-  }
-}
-```
-
-#### 对齐方式
-
-> 多个属性，多行书写，每个属性占用一行，标签结束另起一行
-
-```javascript
-// bad
-<Foo superLongParam='bar'
-     anotherSuperLongParam='baz' />
-
-// good
-<Foo
-  superLongParam='bar'
-  anotherSuperLongParam='baz'
-/>
-
-// 如果组件的属性可以放在一行就保持在当前一行中
-<Foo bar='bar' />
-
-// 多行属性采用缩进
-<Foo
-  superLongParam='bar'
-  anotherSuperLongParam='baz'
->
-  <Quux />
-</Foo>
-```
-
-#### 空格使用
-> 终始在自闭合标签前面添加一个空格
-
-```javascript
-// bad
-<Foo/>
-
-// very bad
-<Foo                 />
-
-// bad
-<Foo
- />
-
-// good
-<Foo />
-```
-
-#### 属性书写
-
-> 属性名称始终使用驼峰命名法
-
-```javascript
-// bad
-<Foo
-  UserName='hello'
-  phone_number={12345678}
-/>
-
-// good
-<Foo
-  userName='hello'
-  phoneNumber={12345678}
-/>
-```
-
-#### JSX 与括号
-
-> 用括号包裹多行 JSX 标签
-
-```javascript
-
-// bad
-render () {
-  return <MyComponent className='long body' foo='bar'>
-           <MyChild />
-         </MyComponent>
-}
-
-// good
-render () {
-  return (
-    <MyComponent className='long body' foo='bar'>
-      <MyChild />
-    </MyComponent>
-  );
-}
-
-// good
-render () {
-  const body = <div>hello</div>
-  return <MyComponent>{body}</MyComponent>
-}
-```
-
-#### 标签
-
-> 当标签没有子元素时，始终时候自闭合标签
-
-```javascript
-// bad
-<Foo className='stuff'></Foo>
-
-// good
-<Foo className='stuff' />
-```
-
-> 如果控件有多行属性，关闭标签要另起一行
-
-```javascript
-// bad
-<Foo
-  bar='bar'
-  baz='baz' />
-
-// good
-<Foo
-  bar='bar'
-  baz='baz'
-/>
-```
-
-#### 书写顺序
-
-在 Taro 组件中会包含类静态属性、类属性、生命周期等的类成员，其书写顺序最好遵循以下约定（顺序从上至下）
-
-1. static 静态方法
-2. constructor
-3. componentWillMount
-4. componentDidMount
-5. componentWillReceiveProps
-6. shouldComponentUpdate
-7. componentWillUpdate
-8. componentDidUpdate
-9. componentWillUnmount
-10. 点击回调或者事件回调 比如 `onClickSubmit()` 或者 `onChangeDescription()`
-11. render
-
-### 通用约束与建议
-
-#### 所有内置组件均需要引入后再使用
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View } from '@tarojs/components'
-
-class MyComponent extends Component {
-  render () {
-    return (
-	  <View className='test'>     // ✓ 正确
-        <Text>12</Text>     // ✗ 错误
-      </View>
-    )
-  }
-}
-```
-
-#### 推荐使用对象解构的方式来使用 state、props
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-  render () {
-    const { isEnable } = this.props     // ✓ 正确
-    const { myTime } = this.state     // ✓ 正确
-    return (
-      <View className='test'>
-        {isEnable && <Text className='test_text'>{myTime}</Text>}
-      </View>
-    )
-  }
-}
-```
-
-#### 不要以 class/id/style 作为自定义组件的属性名
-
-```javascript
-<Hello class='foo' />     // ✗ 错误
-<Hello id='foo' />     // ✗ 错误
-<Hello style='foo' />     // ✗ 错误
-```
-
-#### 不要使用 HTML 标签
-
-```javascript
-<div className='foo'></div>     // ✗ 错误
-<span id='foo' /></span>    // ✗ 错误
-```
-
-#### 不要在调用 this.setState 时使用 this.state
-
-> 由于 this.setState 异步的缘故，这样的做法会导致一些错误，可以通过给 this.setState 传入函数来避免
-
-```javascript
-this.setState({
-  value: this.state.value + 1
-})   // ✗ 错误
-
-
-this.setState(prevState => ({ value: prevState.value + 1 }))    // ✓ 正确
-
-```
-
-#### map 循环时请给元素加上 key 属性
-
-```javascript
-list.map(item => {
-  return (
-    <View className='list_item' key={item.id}>{item.name}</View>
-  )
-})
-```
-
-#### 尽量避免在 componentDidMount 中调用 this.setState
-
-> 因为在 `componentDidMount` 中调用  `this.setState` 会导致触发更新
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-  
-  componentDidMount () {
-    this.setState({     // ✗ 尽量避免，可以在 componentWillMount 中处理
-      name: 1
-    })
-  }
-  
-  render () {
-    const { isEnable } = this.props
-    const { myTime } = this.state
-    return (
-      <View className='test'>
-        {isEnable && <Text className='test_text'>{myTime}</Text>}
-      </View>
-    )
-  }
-}
-```
-
-#### 不要在 componentWillUpdate/componentDidUpdate/render 中调用 this.setState
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-  
-  componentWillUpdate () {
-    this.setState({     // ✗ 错误
-      name: 1
-    })
-  }
-  
-  componentDidUpdate () {
-    this.setState({     // ✗ 错误
-      name: 1
-    })
-  }
-  
-  render () {
-    const { isEnable } = this.props
-    const { myTime } = this.state
-    this.setState({     // ✗ 错误
-      name: 11
-    })
-    return (
-      <View className='test'>
-        {isEnable && <Text className='test_text'>{myTime}</Text>}
-      </View>
-    )
-  }
-}
-```
-
-#### 不要定义没有用到的 state
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12,
-    noUsed: true   // ✗ 没有用到
-  }
-  
-  render () {
-    const { myTime } = this.state
-    return (
-      <View className='test'>
-        <Text className='test_text'>{myTime}</Text>
-      </View>
-    )
-  }
-}
-```
-
-#### 组件最好定义 defaultProps
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-
-  static defaultProps = {
-    isEnable: true
-  }
-  
-  state = {
-    myTime: 12
-  }
-  
-  render () {
-    const { isEnable } = this.props
-    const { myTime } = this.state
-
-    return (
-      <View className='test'>
-        {isEnable && <Text className='test_text'>{myTime}</Text>}
-      </View>
-    )
-  }
-}
-```
-
-#### render 方法必须有返回值
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-  
-  render () {   // ✗ 没有返回值
-    const { isEnable } = this.props
-    const { myTime } = this.state
-
-    <View className='test'>
-      {isEnable && <Text className="test_text">{myTime}</Text>}
-    </View>
-  }
-}
-```
-
-#### 值为 true 的属性可以省略书写值
-
-```javascript
-<Hello personal />
-<Hello personal={false} />
-```
-
-#### JSX 属性或者表达式书写时需要注意空格
-
-属性书写不带空格，如果属性是一个对象，则对象括号旁边需要带上空格
-
-```javascript
-<Hello name={ firstname } />   // ✗ 错误
-<Hello name={ firstname} />   // ✗ 错误
-<Hello name={firstname } />   // ✗ 错误
-<Hello name={{ firstname: 'John', lastname: 'Doe' }} />      // ✓ 正确
-```
-
-#### 事件绑定均以 on 开头
-
-> 在 Taro 中所有默认事件如 `onClick`、`onTouchStart` 等等，均以 `on` 开头
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-
-  clickHandler (e) {
-    console.log(e)
-  }
-  
-  render () {
-    const { myTime } = this.state
-
-    return (
-      <View className='test' onClick={this.clickHandler}>    // ✓ 正确
-        <Text className='test_text'>{myTime}</Text>
-      </View>
-    )
-  }
-}
-```
-
-#### 子组件传入函数时属性名需要以 on 开头
-
-```javascript
-import Taro, { Component } from '@tarojs/taro'
-import { View, Input } from '@tarojs/components'
-
-import Tab from '../../components/Tab/Tab'
-
-class MyComponent extends Component {
-  state = {
-    myTime: 12
-  }
-
-  clickHandler (e) {
-    console.log(e)
-  }
-  
-  render () {
-    const { myTime } = this.state
-
-    return (
-      <View className='test'>
-        <Tab onChange={this.clickHandler} />    // ✓ 正确
-        <Text className='test_text'>{myTime}</Text>
-      </View>
-    )
-  }
-}
-```
-
-### Taro 自身限制规范
-
-#### 不能在包含 JSX 元素的 map 循环中使用 if 表达式
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-numbers.map((number) => {
-  let element = null
-  const isOdd = number % 2
-  if (isOdd) {
-    element = <Custom />
-  }
-  return element
-})
-```
-
-以下代码不会被警告，也应当在 Taro 任意端中能够运行：
-
-```javascript
-numbers.map((number) => {
-  let isOdd = false
-  if (number % 2) {
-    isOdd = true
-  }
-  return isOdd && <Custom />
-})
-```
-
-**解决方案**
-
-尽量在 map 循环中使用条件表达式或逻辑表达式
-
-```javascript
-numbers.map((number) => {
-  const isOdd = number % 2
-  return isOdd ? <Custom /> : null
-})
-
-numbers.map((number) => {
-  const isOdd = number % 2
-  return isOdd && <Custom />
-})
-```
-
-#### 不能使用 Array#map 之外的方法操作 JSX 数组 
-
-> Taro 在小程序端实际上把 JSX 转换成了字符串模板，而一个原生 JSX 表达式实际上是一个 React/Nerv 元素(react-element)的构造器，因此在原生 JSX 中你可以随意地对一组 React 元素进行操作。但在 Taro 中你只能使用 `map` 方法，Taro 转换成小程序中 `wx:for`
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-test.push(<View />)
-
-numbers.forEach(number => {
-  if (someCase) {
-    a = <View />
-  }
-})
-
-test.shift(<View />)
-
-components.find(component => {
-  return component === <View />
-})
-
-components.some(component => component.constructor.__proto__ === <View />.constructor)
-```
-
-以下代码不会被警告，也应当在 Taro 任意端中能够运行：
-
-```javascript
-numbers.filter(Boolean).map((number) => {
-  const element = <View />
-  return <View />
-})
-```
-
-**解决方案**
-
-先处理好需要遍历的数组，然后再用处理好的数组调用 `map` 方法。
-
-```javascript
-numbers.filter(isOdd).map((number) => <View />)
-
-for (let index = 0; index < array.length; index++) {
-  // do you thing with array
-}
-
-const element = array.map(item => {
-  return <View />
-})
-```
-
-#### 不能在 JSX 参数中使用匿名函数
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-<View onClick={() => this.handleClick()} />
-
-<View onClick={(e) => this.handleClick(e)} />
-
-<View onClick={() => ({})} />
-
-<View onClick={function () {}} />
-
-<View onClick={function (e) {this.handleClick(e)}} />
-```
-
-以下代码不会被警告，也应当在 Taro 任意端中能够运行：
-
-```javascript
-<View onClick={this.hanldeClick} />
-
-<View onClick={this.props.hanldeClick} />
-
-<View onClick={this.hanldeClick.bind(this)} />
-
-<View onClick={this.props.hanldeClick.bind(this)} />
-```
-
-**解决方案**
-
-使用 [`bind`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) 或 [类参数](https://babeljs.io/docs/plugins/transform-class-properties/)绑定函数
-
-```javascript
-<View onClick={this.props.hanldeClick.bind(this)} />
-```
-
-
-#### 不允许在 JSX 参数(props)中传入 JSX 元素
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-<Custom child={<View />} />
-
-<Custom child={() => <View />} />
-
-<Custom child={function () { <View /> }} />
-
-<Custom child={ary.map(a => <View />)} />
-```
-
-**解决方案**
-
-通过 props 传值在 JSX 模板中预先判定显示内容
-
-#### 不能在 JSX 参数中使用对象展开符
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-<View {...this.props} />
-
-<View {...props} />
-
-<Custom {...props} />
-```
-
-以下代码不会被警告，也应当在 Taro 任意端中能够运行：
-
-```javascript
-const { id, ...rest } = obj
-
-const [ head, ...tail]  = array
-
-const obj = { id, ...rest }
-```
-
-**解决方案**
-
-除非微信小程序开放更多能力，目前看不到能支持该特性的可能性
-
-
-#### 不支持无状态组件
-
-以下代码会被 ESLint 提示警告，同时在 Taro（小程序端）也不会有效：
-
-```javascript
-function Test () {
-  return <View />
-}
-
-function Test (ary) {
-  return ary.map(() => <View />)
-}
-
-const Test = () => {
-  return <View />
-}
-
-const Test = function () {
-  return <View />
-}
-
-```
-
-以下代码不会被警告，也应当在 Taro 任意端中能够运行：
-
-```javascript
-class App extends Component {
-  render () {
-    return (
-      <View />
-    )
-  }
-}
-```
-
-**解决方案**
-
-使用 `class` 定义组件
